@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!--<script src="script.js"></script> -->
+    <title>Albert Einstein</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <a href="#" class="nav-link">
+            <h1>Albert Einstein</h1>
+        </a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#about" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#exp" class="nav-link">Experience</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#hob" class="nav-link">Hobbies</a>
+            </li>
+            <li class="nav-item">
+                <a href="#papers" class="nav-link">Papers</a>
+            </li>
+            <li class="nav-item">
+                <a href="#blog" class="nav-link">Blogs</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+    <section id="hero">
+        <div id="hero-text">
+        </div>
+
+    </section>
+    <section id="about">
+        <h2 class="headings">About</h2>
+        <p>
+            Albert Einstein was a German-born theoretical physicist, widely acknowledged to be one of the greatest and
+            most influential physicists of all time.
+            Einstein is best known for developing the theory of relativity, but he also made important contributions to
+            the development of the theory of quantum mechanics.
+        </p>
+    </section>
+    <section id="exp">
+        <h2 class="headings">Experience</h2>
+        <div style="padding-left: 40px;">
+            <ul id="grid-list">
+                <li>
+                    <h3>Swiss Patent Office, Bern</h3>
+                    <p>1902-1909</p>
+                    <p>Clerk</p>
+                </li>
+
+
+
+                <li>
+                    <h3> University of Bern</h3>
+                    <p>1908</p>
+                    <p>Lecturer</p>
+                </li>
+
+
+
+                <li>
+                    <h3>University of Zurich</h3>
+                    <p>1909-1910</p>
+                    <p>Associate professor of physics</p>
+                </li>
+
+
+
+                <li>
+                    <h3>Unversity of Prague</h3>
+                    <p>1911</p>
+                    <p>Professor of physics</p>
+                </li>
+                <li>
+                    <h3>Kaiser Wilhelm Physical Institution, Berlin</h3>
+                    <p>1914-1933</p>
+                    <p>Director</p>
+                </li>
+
+            </ul>
+
+        </div>
+    </section>
+    <section id="hob">
+        <h2 class="headings">Hobbies</h2>
+        <ul>
+            <li>
+                <p id="hob1"><span>Doing Puzzles</p>
+            </li>
+            <li>
+                <p id="hob2"><span>Playing Violin</p>
+            </li>
+            <li>
+                <p id="hob3"><span>Reading Books about Nature</p>
+            </li>
+        </ul>
+    </section>
+    <div id="papers">
+        <h2 class="headings">Papers</h2>
+        <div id="book-container"></div>
+        <script>
+            fetch("https://upadhayay.github.io/db.json")
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (db) {
+                    let books = db.books;
+                    let numBooks = books.length;
+                    let authorCounts = {};
+                    for (let i = 0; i < numBooks; i++) {
+                        let author = books[i].author;
+                        if (authorCounts[author]) {
+                            authorCounts[author]++;
+                        } else {
+                            authorCounts[author] = 1;
+                        }
+                    }
+                    let bookContainer = document.getElementById("book-container");
+                    for (let i = 0; i < numBooks; i++) {
+                        let bookDiv = document.createElement("div");
+                        bookDiv.id = `book-${i + 1}`;
+                        bookContainer.appendChild(bookDiv);
+
+                        let placeholder = document.querySelector(`#book-${i + 1}`);
+                        let out = "";
+                        out += `<br>` + `<h2> Title:- ${books[i].title}</h2>` + `<br>` +
+                            `<h2>Published Year:- ${books[i].year}</h2>`;
+                        let author = books[i].author;
+                        if (authorCounts[author] === 1) {
+                            out += `<h2>Author:- ${author}</h2>`;
+                        }
+                        placeholder.innerHTML = out;
+                    }
+                });
+
+        </script>
+
+
+    </div>
+    <section id="blog">
+        <h2 class="headings">Blogs</h2>
+
+        <div id="blogbox">
+            <div class="blogtext">
+                <h1>Albert Einstein – His Words in Today's Context</h1>
+                <a href="https://alberteinsteinblog.org/" alt="Link to Blog">Click here to view the blog</a>
+            </div>
+            <div class="blogtext">
+                <h1>Albert Einstein Unique Approach to Thinking</h1>
+                <a href="https://evernote.com/blog/einsteins-unique-approach-to-thinking/" alt="Link to Blog">Click here
+                    to view the blog</a>
+            </div>
+            <div class="blogtext">
+                <h1>Einstein: The World As I See It</h1>
+                <a href="https://fs.blog/einstein-the-world-as-i-see-it/" alt="Link to Blog">Click here
+                    to view the blog</a>
+            </div>
+
+        </div>
+
+        </div>
+        <a href="#" class="back-to-top"><img src="assets/top.png" width="30px" height="30px" alt="top-button"></a>
+
+        <footer class="footer" id="footer">
+            <h4>Copyrights Reserved. @2023</h4>
+        </footer>
+</body>
+<script>
+    const hamburger1 = document.querySelector(".hamburger");
+    const navMenu1 = document.querySelector(".nav-menu");
+
+    hamburger1.addEventListener("click", () => {
+        hamburger1.classList.toggle("active");
+        navMenu1.classList.toggle("active");
+    })
+
+    document.querySelectorAll(".nav-item").forEach(n => n.
+        addEventListener("click", () => {
+            hamburger1.classList.remove("active");
+            navMenu1.classList.remove("active");
+        }));
+    var hiddenElement = document.querySelector('.back-to-top');
+
+    if (hiddenElement) {
+        window.addEventListener('scroll', function () {
+            if (isScrolledIntoView(hiddenElement)) {
+                hiddenElement.classList.add('visible');
+            }
+        });
+    }
+
+    function isScrolledIntoView(element) {
+        if (!element) {
+            return false;
+        }
+        var rect = element.getBoundingClientRect();
+        var windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+        var topVisible = rect.top < windowHeight;
+        var bottomVisible = rect.bottom >= 0;
+        return (topVisible && bottomVisible);
+    }
+
+</script>
+
+</html>
